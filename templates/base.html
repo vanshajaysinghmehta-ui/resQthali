@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{% block title %}resQthali — every meal matters{% endblock %}</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">{% block head %}{% endblock %}<style>
+:root{--ink:#321d1a;--muted:#786b66;--red:#b83a32;--red-dark:#8e2926;--soft-red:#f6dfd9;--beige:#f7ede2;--cream:#fffaf6;--white:#fff;--line:#eadbd1;--gold:#d99b55}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif}a{color:inherit}.shell{max-width:1180px;margin:auto;padding:0 28px}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font:800 1.25rem 'Plus Jakarta Sans';text-decoration:none;letter-spacing:-.04em}.brand-mark{display:inline-grid;place-items:center;background:var(--red);color:#fff;width:31px;height:31px;border-radius:10px;margin-right:8px;font-size:.82rem}.nav-links{display:flex;gap:18px;align-items:center;color:var(--muted);font-size:.86rem}.nav-links a{text-decoration:none}.nav-links a:hover{color:var(--red)}.nav-cta,.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:11px;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:12px 18px;cursor:pointer}.nav-cta{padding:10px 15px;font-size:.84rem}.btn.gold{background:var(--gold)}.btn.ghost{background:transparent;color:var(--red);border:1px solid #dcb8ab}.eyebrow{color:var(--red);text-transform:uppercase;letter-spacing:.14em;font-weight:800;font-size:.7rem}.hero{padding:68px 0 82px;background:radial-gradient(circle at 88% 15%,#efd0b8 0,transparent 28%),linear-gradient(135deg,#fffaf6 0,#f7ede2 100%)}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}.hero h1{font:800 clamp(2.7rem,6vw,5.1rem)/1.03 'Plus Jakarta Sans';letter-spacing:-.07em;margin:15px 0 20px;max-width:680px}.hero h1 span{color:var(--red)}.hero p{color:var(--muted);font-size:1.08rem;line-height:1.7;max-width:570px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.hero-card{background:var(--red);color:#fff;border-radius:27px;padding:30px;min-height:335px;position:relative;overflow:hidden;box-shadow:0 24px 55px #8e292633}.hero-card:after{content:'🍲';position:absolute;right:18px;bottom:-17px;font-size:10.5rem;filter:drop-shadow(0 14px 8px #5d151344)}.hero-card h3{font:700 1.15rem 'Plus Jakarta Sans';margin:0 0 18px}.mini-stat{display:flex;gap:14px;align-items:center;margin-top:22px}.mini-stat strong{font:800 2.1rem 'Plus Jakarta Sans'}.mini-stat span{color:#f9d9d0;font-size:.86rem}.section{padding:78px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}.section h2{font:800 2rem 'Plus Jakarta Sans';letter-spacing:-.05em;margin:8px 0}.section-lead{color:var(--muted);max-width:560px;line-height:1.6}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.feature-card,.panel,.card{background:#fff;transition:transform .22s ease,box-shadow .22s ease}.feature-card:hover,.card:hover,.panel:hover{transform:translateY(-6px);box-shadow:0 18px 36px #6a38251a}.btn,.nav-cta{transition:transform .18s ease,box-shadow .18s ease}.btn:hover,.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 18px #8e292633}.reveal{animation:riseIn .55s ease both}@keyframes riseIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}.profile-avatar{width:70px;height:70px;border-radius:22px;object-fit:cover;background:var(--soft-red);display:grid;place-items:center;color:var(--red);font-size:1.7rem}.upload-label{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border:1px dashed #dcb8ab;border-radius:10px;color:var(--red);font-weight:700;cursor:pointer}.upload-label input{display:none}.chat-suggestions{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 10px}.chat-suggestions button{border:1px solid #dcb8ab;background:var(--soft-red);color:var(--red);border-radius:20px;padding:6px 9px;font-size:.72rem;cursor:pointer}.chat-msg{padding:8px 10px;border-radius:11px;margin:5px 0;max-width:90%}.chat-msg.user{background:var(--soft-red);margin-left:auto;color:var(--ink)}.chat-msg.bot{background:#f7ede2;color:var(--ink)}.chat-status{font-size:.75rem;color:var(--muted);padding:0 12px 8px}.email-check{font-size:.8rem;margin-top:5px;min-height:18px}.email-check.ok{color:#247044}.email-check.bad{color:var(--red)}.hero-card,.about-card,.feature-card,.card{will-change:transform}.feature-card,.panel,.card{border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 10px 26px #6a38250b}.feature-icon{width:42px;height:42px;display:grid;place-items:center;background:var(--soft-red);border-radius:13px;font-size:1.3rem}.feature-card h3{font:700 1.08rem 'Plus Jakarta Sans';margin:18px 0 8px}.feature-card p,.muted{color:var(--muted);line-height:1.55}.help-section{background:var(--beige)}.help-banner{background:var(--red);color:white;border-radius:24px;padding:32px;display:grid;grid-template-columns:1.3fr repeat(3,1fr);gap:20px;align-items:center}.help-banner h2{margin:0;font:800 1.55rem 'Plus Jakarta Sans'}.help-banner p{color:#f8d8d0}.help-banner strong{font:800 1.9rem 'Plus Jakarta Sans';display:block;color:#ffe5c4}.help-banner span{font-size:.83rem;color:#f9d9d0}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:center}.about-card{background:var(--beige);border-radius:24px;padding:30px;min-height:250px}.about-card .cycle{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:45px}.cycle div{background:#fff;padding:13px 12px;border-radius:12px;text-align:center;font-weight:700;font-size:.78rem;box-shadow:0 5px 12px #6a38250b}.cycle b{color:var(--red)}.footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:.84rem}.chat-toggle{position:fixed;right:22px;bottom:22px;background:var(--red);color:#fff;border:0;border-radius:50px;padding:13px 18px;font-weight:700;box-shadow:0 8px 24px #8e292644;cursor:pointer;z-index:20}.chatbot{position:fixed;right:22px;bottom:78px;width:320px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 50px #321d1a33;display:none;overflow:hidden;z-index:20}.chat-head{background:var(--red);color:#fff;padding:16px;font-weight:700}.chat-body{height:190px;padding:15px;overflow-y:auto;color:var(--muted);font-size:.9rem}.chat-input{display:flex;border-top:1px solid var(--line);padding:9px;gap:7px}.chat-input input{min-width:0;flex:1;border:0;padding:8px;outline:0}.chat-input button{border:0;border-radius:9px;background:var(--red);color:#fff;padding:8px 12px;font-weight:700}.cert{background:linear-gradient(135deg,#fffaf6,#f7ede2);border:9px double var(--red);padding:48px;text-align:center;max-width:760px;margin:30px auto}.cert h1{font:800 2.3rem 'Plus Jakarta Sans';color:var(--red)}@media(max-width:850px){.shell{padding:0 18px}.nav-links{display:none}.hero{padding:43px 0 60px}.hero-grid,.about-grid{grid-template-columns:1fr;gap:28px}.cards{grid-template-columns:1fr}.help-banner{grid-template-columns:1fr 1fr}.section{padding:58px 0}.hero-card{min-height:250px}.chatbot{right:12px;left:12px;width:auto}}@media(max-width:500px){.help-banner{grid-template-columns:1fr}.section-head{display:block}.section-head .btn{margin-top:16px}}
+
+/* resQthali interaction layer: warm, tactile, intentionally human — no visual system changes */
+:root{--ease-out:cubic-bezier(.23,1,.32,1);--ease-in-out:cubic-bezier(.77,0,.175,1)}
+body{overflow-x:hidden}
+#particle-layer{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.48}
+header,.section,.footer,.flash-stack,.side-nav{position:relative;z-index:2}
+.nav a,.btn,.feature-card,.card,.about-card,.hero-card,.chat-toggle,.chat-suggestions button,.side-nav a{transition:transform .18s var(--ease-out),box-shadow .18s var(--ease-out),background-color .18s var(--ease-out),color .18s var(--ease-out),border-color .18s var(--ease-out)}
+.nav a:not(.brand):hover{transform:translateY(-2px)}
+.btn:active,.chat-toggle:active,.chat-input button:active,.nav-cta:active{transform:scale(.97)}
+.btn,.nav-cta,.feature-card,.card,.about-card,.hero-card{position:relative;overflow:hidden}
+.btn::after,.nav-cta::after,.chat-toggle::after{content:"";position:absolute;inset:-30% auto -30% -80%;width:42%;background:linear-gradient(105deg,transparent,#ffffff66,transparent);transform:skewX(-18deg);transition:left .5s var(--ease-out);pointer-events:none}
+.btn:hover::after,.nav-cta:hover::after,.chat-toggle:hover::after{left:135%}
+.feature-card:hover,.card:hover,.about-card:hover{transform:translateY(-5px);box-shadow:0 18px 35px #6a38251a}
+.feature-card:hover .feature-icon{transform:rotate(-6deg) scale(1.06);background:#ffe0d8}
+.feature-icon{transition:transform .2s var(--ease-out),background-color .2s var(--ease-out)}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease-out),transform .55s var(--ease-out)}
+.reveal.is-visible{opacity:1;transform:none}
+[data-tilt]{transform-style:preserve-3d}
+.flash-message{animation:notice-in .4s var(--ease-out) both}
+@keyframes notice-in{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.chatbot{transform-origin:bottom right;opacity:0;transform:translateY(10px) scale(.97);transition:opacity .2s var(--ease-out),transform .2s var(--ease-out)}
+.chatbot.is-open{display:block;opacity:1;transform:none}
+.chat-toggle{animation:soft-pulse 3.6s ease-in-out infinite}
+@keyframes soft-pulse{0%,74%,100%{box-shadow:0 8px 24px #8e292644}82%{box-shadow:0 8px 24px #8e292644,0 0 0 7px #8e292614}}
+.chat-suggestions{display:flex;gap:6px;padding:0 12px 10px;flex-wrap:wrap}
+.chat-suggestions button{border:1px solid var(--line);background:var(--beige);color:var(--ink);border-radius:999px;padding:6px 9px;font-size:.72rem;cursor:pointer}
+.chat-suggestions button:hover{border-color:var(--red);color:var(--red);transform:translateY(-1px)}
+.chat-status{min-height:18px;padding:0 14px;color:var(--muted);font-size:.75rem}
+.chat-msg{animation:message-in .25s var(--ease-out) both}
+@keyframes message-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.resq-toast{position:fixed;right:22px;top:22px;z-index:80;background:var(--ink);color:#fff;padding:12px 15px;border-radius:12px;box-shadow:0 14px 30px #321d1a2b;font-size:.82rem;font-weight:700;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .2s var(--ease-out),transform .2s var(--ease-out)}
+.resq-toast.show{opacity:1;transform:none}
+button[disabled],.btn[aria-busy="true"]{opacity:.68;cursor:wait}
+@media(max-width:600px){.resq-toast{left:18px;right:18px;top:14px;text-align:center}#particle-layer{opacity:.3}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}.reveal{opacity:1;transform:none}#particle-layer{display:none}}
+
+/* Premium refinement layer: calmer type rhythm, anchored content windows, and scroll depth */
+html{scroll-behavior:smooth}
+body{background:#fffaf6;color:var(--ink);font-kerning:normal}
+.shell{width:min(1120px,calc(100% - 48px));margin-inline:auto}
+.hero{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(90deg,rgba(255,250,246,.80) 0%,rgba(255,250,246,.56) 42%,rgba(255,250,246,.28) 100%),url('/static/resqthali-child.jpeg') center calc(50% + var(--scroll-shift,0px))/cover;border-bottom:1px solid #ead8ca;box-shadow:inset 0 -1px #ffffffaa}
+.hero::after{content:"";position:absolute;inset:auto 0 0;height:110px;background:linear-gradient(transparent,#fffaf6);z-index:-1;pointer-events:none}
+.hero-grid{position:relative;z-index:1;min-height:540px;align-items:center}
+.hero-grid>div:first-child{max-width:610px;padding-block:34px}
+h1,h2,h3,p{overflow-wrap:break-word}
+h1,h2{letter-spacing:-.045em;text-wrap:balance}
+h1{max-width:610px;line-height:.98;margin-bottom:24px}
+h1 span{display:inline-block}
+.hero-grid p{max-width:540px;line-height:1.72}
+.hero-card{backdrop-filter:blur(4px);background:linear-gradient(145deg,#b9362ce8,#9e2f29e8);border:1px solid #ffffff44;box-shadow:0 26px 60px #6a382533,0 2px 0 #ffffff22 inset}
+.section{scroll-margin-top:26px}
+.section-head{gap:34px;align-items:end}
+.section-head>div{max-width:620px}
+.section-head .section-lead{max-width:470px;margin-bottom:0}
+.feature-card,.card,.about-card,.panel{box-shadow:0 14px 34px #6a38250d;border-color:#ead8ca}
+.feature-card p,.card p{max-width:34ch}
+.about-card{overflow:hidden}
+.help-section{position:relative}
+.help-section::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 20%,#ffffffaa,transparent 30%);pointer-events:none}
+.help-section>.shell{position:relative}
+.cycle{align-items:stretch!important}
+.cycle div{min-width:0;flex:1}
+.scroll-progress{position:fixed;left:0;top:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--red));z-index:100;box-shadow:0 1px 8px #c4513e55;transition:width .08s linear}
+.section,.hero-card,.feature-card,.card,.about-card,.panel,.cert{will-change:transform}
+@media(max-width:850px){.shell{width:calc(100% - 36px)}.hero{background-position:58% calc(50% + var(--scroll-shift,0px))}.hero-grid{min-height:unset}.hero-grid>div:first-child{padding-top:18px}.hero-grid p{max-width:60ch}.hero-card{margin-top:4px}}
+@media(max-width:500px){.shell{width:calc(100% - 28px)}h1{font-size:clamp(2.75rem,14vw,4.25rem);line-height:.96}.section-head .section-lead{margin-top:14px}.cycle{gap:5px!important}.cycle div{font-size:.68rem;padding:10px 5px}.cycle b{font-size:.8rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero{background-position:center}.scroll-progress{display:none}}
+
+/* Additive finishing layer: preserve the existing image and keep every layout inside its viewport. */
+.hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(115deg,#fffaf615 0%,transparent 48%,#8e292617 100%)}
+.hero-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}
+.cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+.about-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.help-banner{grid-template-columns:minmax(0,1.3fr) repeat(3,minmax(0,1fr))}
+.shell,.shell *{min-width:0}
+img,video,iframe{max-width:100%}
+table{display:block;max-width:100%;overflow-x:auto}
+pre,code{max-width:100%;overflow-x:auto;overflow-wrap:anywhere}
+.nav{min-width:0}.nav>div{min-width:0}.nav-links{flex-wrap:wrap}
+*:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+@media(max-width:850px){.hero-grid,.about-grid{grid-template-columns:minmax(0,1fr)}.cards{grid-template-columns:minmax(0,1fr)}.help-banner{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:500px){.help-banner{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:360px){.shell{width:calc(100% - 24px);padding-inline:0}.actions>.btn{width:100%}.hero h1{font-size:clamp(2.5rem,13vw,3.6rem)}.chat-toggle{right:12px;bottom:12px}.chatbot{bottom:70px}}
+
+.hero-card{isolation:isolate}
+.hero-card::before{content:"";position:absolute;z-index:0;top:-66px;right:-45px;width:190px;height:190px;border:1px solid #ffffff3b;border-radius:50%;box-shadow:0 0 0 18px #ffffff0a,0 0 0 38px #ffffff08;pointer-events:none;animation:halo-drift 6s ease-in-out infinite}
+.hero-card>*{position:relative;z-index:1}
+@keyframes halo-drift{0%,100%{transform:translateY(0);opacity:.46}50%{transform:translateY(-8px);opacity:.82}}
+.chat-toggle{right:12px;left:auto;max-width:calc(100vw - 24px)}
+.chatbot{right:12px;left:auto;width:min(320px,calc(100vw - 24px));max-width:calc(100vw - 24px)}
+</style></head><body>
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div><canvas id="particle-layer" aria-hidden="true"></canvas><div class="resq-toast" id="resq-toast" role="status" aria-live="polite"></div><header class="shell"><nav class="nav"><a class="brand" href="/"><span class="brand-mark">rq</span>resQthali</a><div class="nav-links"><a href="/">Home</a><a href="/how-help">How you can help</a><a href="/about">About us</a><a href="/ngo-dashboard">NGO needs</a><a href="/volunteer">Volunteer hub</a><a href="/certificates">Certificates</a></div><div style="display:flex;align-items:center;gap:9px"><a href="/notifications" aria-label="Notifications" style="text-decoration:none;font-size:1.1rem;position:relative">🔔{% if site_notifications|selectattr('unread')|list|length %}<span style="position:absolute;top:-5px;right:-6px;background:var(--red);color:white;border-radius:50%;font-size:.58rem;padding:2px 5px">{{ site_notifications|selectattr('unread')|list|length }}</span>{% endif %}</a>{% if current_user %}<a class="nav-cta" href="/profile">{{ current_user.name.split(' ')[0] }}’s profile</a><a href="/logout" style="font-size:.8rem;color:var(--muted);text-decoration:none">Log out</a>{% else %}<a class="nav-cta" href="/login">Log in</a>{% endif %}<button class="side-open" onclick="document.getElementById('side-nav').classList.toggle('open')" aria-label="Open menu">☰</button></div></nav></header><aside class="side-nav" id="side-nav"><div class="side-top"><strong>resQthali</strong><button onclick="document.getElementById('side-nav').classList.toggle('open')">×</button></div><a href="/">Home</a><a href="/how-help">How you can help</a><a href="/about">About us</a><a href="/donor-dashboard">Restaurant donors</a><a href="/ngo-dashboard">NGO needs</a><a href="/volunteer">Volunteer hub</a><a href="/certificates">Certificates</a><a href="/notifications">Notifications{% if site_notifications|selectattr('unread')|list|length %} · {{ site_notifications|selectattr('unread')|list|length }} new{% endif %}</a><div class="side-divider"></div>{% if current_user %}<a href="/profile">My profile</a><a href="/logout">Log out</a>{% else %}<a class="side-login" href="/login">Log in / create profile</a>{% endif %}</aside><style>.flash-stack{display:grid;gap:8px}.flash-message{padding:12px 15px;border-radius:11px;font-size:.88rem;font-weight:600}.flash-message.success{background:#e6f2e8;color:#247044}.flash-message.info{background:#fff1d8;color:#7b541e}.flash-message.danger{background:var(--soft-red);color:var(--red)}.side-open{display:none;border:0;background:var(--soft-red);color:var(--red);border-radius:10px;padding:9px 11px;font-size:1.1rem;cursor:pointer}.side-nav{position:fixed;z-index:50;right:-320px;top:0;width:300px;height:100vh;background:#fff;box-shadow:-15px 0 40px #321d1a22;padding:25px;transition:right .25s ease}.side-nav.open{right:0}.side-nav a{display:block;padding:13px 5px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);font-weight:600}.side-nav a:hover{color:var(--red)}.side-top{display:flex;justify-content:space-between;align-items:center;color:var(--red);font:800 1.2rem 'Plus Jakarta Sans';margin-bottom:18px}.side-top button{border:0;background:var(--soft-red);color:var(--red);border-radius:8px;font-size:1.4rem;cursor:pointer}.side-divider{height:14px}.side-login{background:var(--red);color:#fff!important;text-align:center;border-radius:10px;margin-top:12px}@media(max-width:850px){.side-open{display:inline-block}.nav .nav-cta{display:none}}</style>
+{% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}<div class="shell" style="padding-top:10px"><div class="flash-stack">{% for category, message in messages %}<div class="flash-message {{ category }}">{{ message }}</div>{% endfor %}</div></div>{% endif %}{% endwith %}{% block content %}<main>
+<section class="hero"><div class="shell hero-grid"><div><div class="eyebrow">From surplus to shared sustenance</div><h1>Make every extra meal a <span>new beginning.</span></h1><p>resQthali connects donors, volunteers, NGOs, and farmers across India so safe food feeds people first—and unavoidable waste nourishes the soil next.</p><div class="actions"><a class="btn gold" href="/how-help">How you can help</a><a class="btn ghost" href="/match">Explore pickup routes</a></div></div><div class="hero-card" data-tilt><h3>India-wide rescue pulse</h3><p style="color:#f9d9d0;max-width:250px">One thoughtful network for fresher pickups, stronger communities, and healthier soil.</p><div class="mini-stat"><strong>{{ stats.total_meals_saved|default(15420) }}</strong><span>meals saved<br>and counting</span></div><div class="mini-stat"><strong>{{ stats.states_reached|default(8) }}</strong><span>cities currently<br>connected</span></div></div></div></section>
+<section class="section"><div class="shell"><div class="section-head"><div><div class="eyebrow">How you can help</div><h2>There is a place for you here.</h2></div><p class="section-lead">Choose the role that fits your day. Every contribution helps us keep food, dignity, and resources moving.</p></div><div class="cards"><a class="feature-card" href="/donor-dashboard" style="text-decoration:none"><div class="feature-icon">🍱</div><h3>Donate food</h3><p>Share safe cooked meals, groceries, or ration supplies with a nearby partner NGO.</p><span style="color:var(--red);font-weight:700">Start donating →</span></a><a class="feature-card" href="/volunteer" style="text-decoration:none"><div class="feature-icon">🚲</div><h3>Volunteer for pickup</h3><p>Use your time, two-wheeler, or vehicle to help food travel the last mile.</p><span style="color:var(--red);font-weight:700">Join the volunteer hub →</span></a><a class="feature-card" href="/ngo-dashboard" style="text-decoration:none"><div class="feature-icon">🤝</div><h3>Support an NGO</h3><p>See verified organisations and the needs that are most urgent across India.</p><span style="color:var(--red);font-weight:700">View NGO needs →</span></a></div></div></section>
+<section class="section help-section"><div class="shell"><div class="about-grid"><div><div class="eyebrow">About resQthali</div><h2>Food rescue that completes the circle.</h2><p class="section-lead">We believe a good system should care for people and the planet. Safe surplus food is matched to communities through our NGO network. Food that is no longer fit to serve is separated responsibly and converted into nutrient-rich vermicompost.</p><a class="btn" href="/about">Read our full story →</a></div><div class="about-card"><div class="eyebrow">Our circular impact</div><div class="cycle"><div>🍛<br>Surplus food</div><b>→</b><div>🌱<br>Vermicompost</div><b>→</b><div>🌾<br>Farmers</div></div><p class="muted" style="margin-bottom:0">We deliver compost to farmers at the lowest possible price, helping return nutrients to the land without adding a heavy cost.</p></div></div></div></section>
+<section class="section" style="padding-top:0"><div class="shell"><div class="help-banner"><div><div class="eyebrow" style="color:#ffe5c4">Our impact</div><h2>Small acts add up.</h2><p>Every rescued plate and every volunteer hour strengthens the circle.</p></div><div><strong>{{ stats.total_meals_saved|default(15420) }}</strong><span>meals saved</span></div><div><strong>{{ stats.compost_kg|default(2180) }} kg</strong><span>composted responsibly</span></div><div><strong>{{ stats.active_ngos|default(8) }}</strong><span>partner NGOs</span></div></div></div></section>
+</main>{% endblock %}<footer class="shell footer">© 2026 resQthali · Food rescue, responsible compost, stronger farms.</footer>
+<button class="chat-toggle" onclick="toggleChat()">Chat with us</button><div class="chatbot" id="chatbot"><div class="chat-head">resQthali assistant <span style="float:right;opacity:.8">● online</span></div><div class="chat-body" id="chat-body"><div class="chat-msg bot">Hi! I can help with restaurant verification, NGO requests, routes, or vermicompost.</div></div><div class="chat-suggestions"><button onclick="askBot('How do I verify a restaurant?')">Verify restaurant</button><button onclick="askBot('How can an NGO request food?')">NGO request</button><button onclick="askBot('What happens to food waste?')">Compost</button></div><div class="chat-status" id="chat-status"></div><div class="chat-input"><input id="chat-input" placeholder="Ask resQthali…" onkeydown="if(event.key==='Enter')sendMessage()"><button onclick="sendMessage()">Send</button></div></div>{% block footer_scripts %}{% endblock %}<script>
+(function(){
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const toast = document.getElementById('resq-toast');
+  let toastTimer;
+  window.resqToast = function(message){
+    if(!toast) return;
+    toast.textContent = message; toast.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(()=>toast.classList.remove('show'), 2600);
+  };
+  window.toggleChat = function(){
+    const el=document.getElementById('chatbot'); if(!el) return;
+    const open=!el.classList.contains('is-open'); el.classList.toggle('is-open',open);
+    if(open){ const input=document.getElementById('chat-input'); setTimeout(()=>input&&input.focus(),120); }
+  };
+  window.askBot = function(text){ const input=document.getElementById('chat-input'); if(input){input.value=text;sendMessage();} };
+  window.addChat = function(text,kind){ const body=document.getElementById('chat-body'),el=document.createElement('div'); if(!body)return; el.className='chat-msg '+kind; el.textContent=text; body.appendChild(el); body.scrollTop=body.scrollHeight; };
+  window.sendMessage = function(){
+    const input=document.getElementById('chat-input'),text=input&&input.value.trim(),status=document.getElementById('chat-status');
+    if(!text)return; addChat(text,'user'); input.value=''; if(status)status.textContent='Thinking…';
+    fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text})})
+      .then(r=>r.json()).then(d=>{if(status)status.textContent='';addChat(d.reply||'I can help with food rescue, NGO requests, routes, and verification.','bot');})
+      .catch(()=>{if(status)status.textContent='';addChat('I’m having trouble connecting. Please try again.','bot');});
+  };
+  function burst(x,y,color){
+    if(reduced)return;
+    const layer=document.createElement('span'); layer.className='click-burst';
+    Object.assign(layer.style,{left:x+'px',top:y+'px',background:color||'var(--gold)'}); document.body.appendChild(layer);
+    setTimeout(()=>layer.remove(),520);
+  }
+  function foodBurst(x,y){
+    if(reduced)return;
+    const icons=['🍚','🍛','🥕','🌾','✨','🍱','🌱','•'];
+    for(let i=0;i<12;i++){
+      const particle=document.createElement('span'); particle.className='food-particle'; particle.textContent=icons[i%icons.length];
+      const angle=(Math.PI*2*i/12)+(Math.random()-.5)*.35, distance=42+Math.random()*48;
+      particle.style.left=x+'px'; particle.style.top=y+'px'; particle.style.setProperty('--dx',Math.cos(angle)*distance+'px'); particle.style.setProperty('--dy',(Math.sin(angle)*distance-18)+'px'); particle.style.setProperty('--rot',(Math.random()*100-50)+'deg');
+      document.body.appendChild(particle); setTimeout(()=>particle.remove(),820);
+    }
+    if(window.resqToast)window.resqToast('A little food rescue momentum ✨');
+  }
+  document.addEventListener('click',e=>{
+    const target=e.target.closest('a,.btn,button'); if(!target)return;
+    const label=(target.textContent||'').toLowerCase();
+    const foodAction=label.includes('donat')||label.includes('food request')||label.includes('publish request')||label.includes('save profile & publish')||target.matches('a[href*="/donate-to-ngo"],a[href*="/donor-dashboard"]');
+    burst(e.clientX,e.clientY,target.classList.contains('gold')?'#d8a84e':'#c4513e');
+    if(foodAction)foodBurst(e.clientX,e.clientY);
+    if(target.matches('button[type="submit"],form .btn[type="submit"]')){
+      target.setAttribute('aria-busy','true'); target.dataset.originalText=target.textContent; target.textContent='Saving…';
+      setTimeout(()=>{if(document.body.contains(target)){target.removeAttribute('aria-busy');target.textContent=target.dataset.originalText||'Save';}},3200);
+    }
+  });
+  const style=document.createElement('style'); style.textContent='.click-burst{position:fixed;z-index:90;width:10px;height:10px;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);animation:burst .5s var(--ease-out) forwards}@keyframes burst{0%{opacity:.8;box-shadow:0 0 0 0 currentColor;transform:translate(-50%,-50%) scale(.6)}100%{opacity:0;box-shadow:0 0 0 22px transparent;transform:translate(-50%,-50%) scale(1.4)}}.food-particle{position:fixed;z-index:91;pointer-events:none;font-size:1.15rem;line-height:1;transform:translate(-50%,-50%);animation:food-pop .78s var(--ease-out) forwards;filter:drop-shadow(0 3px 4px #6a382533)}@keyframes food-pop{0%{opacity:0;transform:translate(-50%,-50%) scale(.55) rotate(0deg)}18%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1) rotate(var(--rot))}}'; document.head.appendChild(style);
+  const reveals=document.querySelectorAll('.section,.hero-card,.feature-card,.card,.about-card,.panel,.cert');
+  reveals.forEach((el,i)=>{el.classList.add('reveal');el.style.transitionDelay=(Math.min(i%6,5)*45)+'ms';});
+  if(!reduced && 'IntersectionObserver' in window){const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');io.unobserve(entry.target);}}),{threshold:.08});reveals.forEach(el=>io.observe(el));}else reveals.forEach(el=>el.classList.add('is-visible'));
+  document.querySelectorAll('[data-tilt]').forEach(card=>{card.addEventListener('pointermove',e=>{if(reduced)return;const r=card.getBoundingClientRect();const rx=((e.clientY-r.top)/r.height-.5)*-3;const ry=((e.clientX-r.left)/r.width-.5)*3;card.style.transform=`perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-3px)`;});card.addEventListener('pointerleave',()=>card.style.transform='');});
+  const progress=document.getElementById('scroll-progress');
+  let scrollTick=false;
+  addEventListener('scroll',()=>{if(scrollTick)return;scrollTick=true;requestAnimationFrame(()=>{const max=document.documentElement.scrollHeight-innerHeight;const ratio=max>0?scrollY/max:0;if(progress)progress.style.width=(ratio*100)+'%';if(!reduced)document.documentElement.style.setProperty('--scroll-shift',Math.min(scrollY*.06,32)+'px');scrollTick=false;});},{passive:true});
+  const canvas=document.getElementById('particle-layer'),ctx=canvas&&canvas.getContext('2d');
+  if(canvas&&ctx&&!reduced){let dots=[],w=0,h=0;function resize(){w=canvas.width=innerWidth*devicePixelRatio;h=canvas.height=innerHeight*devicePixelRatio;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);dots=Array.from({length:Math.min(34,Math.floor(innerWidth/34))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:1+Math.random()*2.3,v:.08+Math.random()*.18,a:.12+Math.random()*.2}));}function tick(){ctx.clearRect(0,0,innerWidth,innerHeight);dots.forEach(d=>{d.y-=d.v;if(d.y<-8)d.y=innerHeight+8;ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fillStyle=`rgba(196,81,62,${d.a})`;ctx.fill();});requestAnimationFrame(tick);}addEventListener('resize',resize);resize();tick();}
+  document.querySelectorAll('form').forEach(form=>form.addEventListener('submit',()=>{const btn=form.querySelector('button[type="submit"]');if(btn){btn.disabled=true;setTimeout(()=>btn.disabled=false,5000);}}));
+})();
+</script></body></html>
