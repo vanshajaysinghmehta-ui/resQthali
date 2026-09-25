@@ -22,10 +22,12 @@ donations = [
 ]
 
 volunteers = [
-    {"id": 1, "name": "Vikram Singh", "city": "Delhi", "status": "Active", "deliveries_completed": 42, "hours": 68, "certificate_id": "RQ-VS-0042"},
-    {"id": 2, "name": "Anita Desai", "city": "Mumbai", "status": "On Route", "deliveries_completed": 18, "hours": 31, "certificate_id": "RQ-AD-0018"},
-    {"id": 3, "name": "Rohan Nair", "city": "Bengaluru", "status": "Active", "deliveries_completed": 27, "hours": 44, "certificate_id": "RQ-RN-0027"},
+    {"id": 1, "name": "Vikram Singh", "city": "Delhi", "status": "Active", "deliveries_completed": 42, "hours": 68, "certificate_id": "RQ-VS-0042", "phone": "", "availability": "Weekends", "transport": "Two-wheeler", "interests": "Pickup and delivery"},
+    {"id": 2, "name": "Anita Desai", "city": "Mumbai", "status": "On Route", "deliveries_completed": 18, "hours": 31, "certificate_id": "RQ-AD-0018", "phone": "", "availability": "Evenings", "transport": "Public transport", "interests": "Community outreach"},
+    {"id": 3, "name": "Rohan Nair", "city": "Bengaluru", "status": "Active", "deliveries_completed": 27, "hours": 44, "certificate_id": "RQ-RN-0027", "phone": "", "availability": "Flexible", "transport": "Two-wheeler", "interests": "Pickup and delivery"},
 ]
+
+volunteer_applications = []
 
 users = [
     {"id": 1, "email": "restaurant@resqthali.demo", "password": "demo123", "name": "Saffron Table Kitchen", "role": "restaurant", "profile_id": 1, "email_verified": True},
@@ -41,7 +43,7 @@ notifications = [
     {"id": 2, "title": "Verification reminder", "message": "Keep your restaurant ID and FSSAI licence details updated to receive pickups.", "time": "Today", "unread": True},
 ]
 
-cities = ["Delhi", "Mumbai", "Bengaluru", "Lucknow", "Pune", "Hyderabad", "Kolkata", "Chennai"]
+cities = ["Delhi", "Mumbai", "Bengaluru", "Lucknow", "Pune", "Hyderabad", "Kolkata", "Chennai", "Ahmedabad", "Jaipur", "Surat", "Nagpur", "Indore", "Bhopal", "Kochi", "Chandigarh", "Patna", "Bhubaneswar", "Guwahati", "Coimbatore", "Agra", "Amritsar", "Aurangabad", "Dehradun", "Dhanbad", "Faridabad", "Ghaziabad", "Goa", "Jabalpur", "Jamshedpur", "Kanpur", "Kota", "Ludhiana", "Madurai", "Mangaluru", "Meerut", "Mysuru", "Nashik", "Noida", "Rajkot", "Ranchi", "Srinagar", "Thiruvananthapuram", "Vadodara", "Varanasi", "Vijayawada", "Visakhapatnam"]
 
 
 def get_dashboard_stats():
@@ -52,6 +54,7 @@ def get_donation_by_id(donation_id): return next((d for d in donations if d["id"
 def get_ngo_by_id(ngo_id): return next((n for n in ngos if n["id"] == ngo_id), None)
 def get_restaurant_by_id(restaurant_id): return next((r for r in restaurants if r["id"] == restaurant_id), None)
 def get_volunteer_by_id(volunteer_id): return next((v for v in volunteers if v["id"] == volunteer_id), None)
+def get_volunteer_application(application_id): return next((a for a in volunteer_applications if a["id"] == application_id), None)
 def get_user(email, password):
     return next((u for u in users if u["email"].lower() == email.lower() and u["password"] == password), None)
 
@@ -69,11 +72,17 @@ def register_user(name, email, password, role, city, phone='', id_number='', fss
         profile_id = max((n["id"] for n in ngos), default=0) + 1
         profile = {"id": profile_id, "name": name, "city": city, "state": "India", "service": "Community food support", "phone": "Pending verification", "email": email, "verified": False, "lat": 28.6139, "lng": 77.2090, "needs": []}
         ngos.append(profile)
+    elif role == "volunteer":
+        profile_id = max((v["id"] for v in volunteers), default=0) + 1
+        profile = {"id": profile_id, "name": name, "city": city, "status": "Application received", "deliveries_completed": 0, "hours": 0, "certificate_id": f"RQ-V-{profile_id:04d}", "phone": phone, "availability": "To be confirmed", "transport": "To be confirmed", "interests": "To be confirmed"}
+        volunteers.append(profile)
+        volunteer_applications.append({"id": profile_id, "volunteer_id": profile_id, "volunteer_name": name, "city": city, "status": "Pending", "ngo_id": None})
     else:
-        return None, "Choose either Restaurant or NGO."
+        return None, "Choose Restaurant, NGO, or Volunteer."
     user = {"id": max((u["id"] for u in users), default=0) + 1, "email": email.lower(), "password": password, "name": name, "role": role, "profile_id": profile_id}
     users.append(user)
     return user, None
+
 def set_donation_match(donation_id, ngo_id):
     donation = get_donation_by_id(donation_id)
     if donation is None or get_ngo_by_id(ngo_id) is None: return None

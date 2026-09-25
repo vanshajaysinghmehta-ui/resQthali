@@ -19,6 +19,8 @@ from db import ngos, restaurants, donations, volunteers, cities, notifications, 
 app = Flask(__name__)
 app.secret_key = "resQthali_secret_key"
 app.config["MAX_CONTENT_LENGTH"] = 8 * 1024 * 1024
+CONTACT_PHONE = os.getenv("RESQTHALI_CONTACT_PHONE", "+91 98765 43210")
+CONTACT_EMAIL = os.getenv("RESQTHALI_CONTACT_EMAIL", "contact@resqthali.org")
 UPLOAD_DIR = Path(app.root_path) / "static" / "uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 ALLOWED_UPLOADS = {"jpg", "jpeg", "png", "webp", "pdf"}
@@ -135,7 +137,7 @@ def login_required(role=None):
 
 @app.context_processor
 def shared_context():
-    return {"current_user": session.get("user"), "site_notifications": notifications}
+    return {"current_user": session.get("user"), "site_notifications": notifications, "contact_phone": CONTACT_PHONE, "contact_email": CONTACT_EMAIL}
 
 
 @app.route('/')
@@ -174,8 +176,10 @@ def register():
         fssai_license = request.form.get('fssai_license', '').strip()
         email_check = gmail_check(email)
         missing_restaurant_details = role == 'restaurant' and not all((phone, id_number, fssai_license))
-        if not name or not password or not email_check['valid'] or missing_restaurant_details:
-            flash(email_check['message'] if not email_check['valid'] else ('Restaurant contact, ID, and FSSAI licence numbers are required.' if missing_restaurant_details else 'Please complete every required field.'), 'danger')
+        missing_volunteer_details = role == 'volunteer' and not phone
+        if not name or not password or not email_check['valid'] or missing_restaurant_details or missing_volunteer_details:
+            message = email_check['message'] if not email_check['valid'] else ('Restaurant contact, ID, and FSSAI licence numbers are required.' if missing_restaurant_details else ('A contact number is required for volunteer applications.' if missing_volunteer_details else 'Please complete every required field.'))
+            flash(message, 'danger')
         else:
             user, error = db.register_user(name, email, password, role, city, phone, id_number, fssai_license)
             if error:
@@ -226,7 +230,8 @@ def profile():
     user = session.get('user')
     if not user:
         return redirect(url_for('login'))
-    return redirect(url_for('restaurant_profile' if user['role'] == 'restaurant' else 'ngo_profile'))
+    destination = {'restaurant': 'restaurant_profile', 'ngo': 'ngo_profile', 'volunteer': 'volunteer_profile'}.get(user['role'], 'volunteer_profile')
+    return redirect(url_for(destination))
 
 
 @app.route('/restaurant-profile', methods=['GET', 'POST'])
@@ -271,7 +276,33 @@ def ngo_profile():
             return redirect(url_for('ngo_profile'))
         flash("Please add an item and quantity.", "danger")
     requests_for_ngo = [r for r in food_requests if r['ngo_id'] == partner['id']]
-    return render_template('ngo_profile.html', partner=partner, food_requests=requests_for_ngo)
+    applications = [a for a in db.volunteer_applications if a['status'] == 'Pending' and (a.get('ngo_id') in (None, partner['id']))]
+    review_notice = session.pop('ngo_review_notice', None)
+    return render_template('ngo_profile.html', partner=partner, food_requests=requests_for_ngo, volunteer_applications=applications, ngo_review_notice=review_notice)
+
+
+@app.route('/ngo-profile/volunteer/<int:application_id>/<action>', methods=['POST'])
+@login_required('ngo')
+def review_volunteer(application_id, action):
+    if action not in ('accept', 'reject'):
+        return jsonify({'error': 'Invalid volunteer action.'}), 400
+    application = db.get_volunteer_application(application_id)
+    ngo_id = session['user']['profile_id']
+    if not application or application['status'] != 'Pending':
+        flash('That volunteer application is no longer available.', 'danger')
+        return redirect(url_for('ngo_profile'))
+    if application.get('ngo_id') not in (None, ngo_id):
+        flash('That volunteer application is assigned to another NGO.', 'danger')
+        return redirect(url_for('ngo_profile'))
+    application['ngo_id'] = ngo_id
+    application['status'] = 'Accepted' if action == 'accept' else 'Rejected'
+    volunteer = db.get_volunteer_by_id(application['volunteer_id'])
+    if volunteer:
+        volunteer['status'] = 'Accepted by NGO' if action == 'accept' else 'Application declined'
+    message = '✓ Volunteer accepted. They can now coordinate with your NGO.' if action == 'accept' else '✕ Volunteer application rejected.'
+    category = 'success' if action == 'accept' else 'danger'
+    session['ngo_review_notice'] = {'message': message, 'category': category}
+    return redirect(url_for('ngo_profile'))
 
 
 @app.route('/ngo-control-room')
@@ -346,6 +377,41 @@ def submit_food():
 
 @app.route('/volunteer')
 def volunteer(): return render_template('volunteer.html', volunteers=volunteers, cities=cities)
+
+@app.route('/volunteer-profile', methods=['GET', 'POST'])
+@login_required('volunteer')
+def volunteer_profile():
+    volunteer = db.get_volunteer_by_id(session['user']['profile_id'])
+    if request.method == 'POST':
+        volunteer['phone'] = request.form.get('phone', '').strip() or volunteer.get('phone', '')
+        volunteer['availability'] = request.form.get('availability', '').strip() or volunteer.get('availability', '')
+        volunteer['transport'] = request.form.get('transport', '').strip() or volunteer.get('transport', '')
+        volunteer['interests'] = request.form.get('interests', '').strip() or volunteer.get('interests', '')
+        flash('Your volunteer details have been saved. We’ll be in touch about nearby opportunities.', 'success')
+        return redirect(url_for('volunteer_profile'))
+    return render_template('volunteer_profile.html', volunteer=volunteer)
+
+
+@app.route('/api/volunteer-profile', methods=['POST'])
+@login_required('volunteer')
+def api_volunteer_profile():
+    volunteer = db.get_volunteer_by_id(session['user']['profile_id'])
+    data = request.get_json(silent=True) or request.form
+    if not volunteer:
+        return jsonify({'ok': False, 'message': 'Volunteer profile not found.'}), 404
+    phone = (data.get('phone') or '').strip()
+    availability = (data.get('availability') or '').strip()
+    transport = (data.get('transport') or '').strip()
+    interests = (data.get('interests') or '').strip()
+    if not phone:
+        return jsonify({'ok': False, 'message': 'Contact number is required.'}), 400
+    if len(phone) < 7 or len(phone) > 20:
+        return jsonify({'ok': False, 'message': 'Enter a valid contact number.'}), 400
+    volunteer['phone'] = phone
+    volunteer['availability'] = availability or volunteer.get('availability', '')
+    volunteer['transport'] = transport or volunteer.get('transport', '')
+    volunteer['interests'] = interests or volunteer.get('interests', '')
+    return jsonify({'ok': True, 'message': 'Volunteer profile saved.'})
 
 @app.route('/certificates')
 def certificates():
