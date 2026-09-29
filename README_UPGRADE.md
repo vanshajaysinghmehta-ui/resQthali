@@ -1,5 +1,11 @@
 # resQthali upgrade notes
 
+## Project Contributors
+* **Vanshajay Singh Mehta** ([@vanshajaysinghmehta-ui](https://github.com/vanshajaysinghmehta-ui)) – Lead Developer & Architecture
+* **[Friend's Name]** ([@friend-github-username](https://github.com/friend-github-username)) – Core Contributor
+
+---
+
 ## Existing site features retained
 
 The original homepage, participant workflows, NGO and donor dashboards, verification flows, matching and route views, notifications, certificates, profile uploads, assistant chat, and both original image assets are retained.
