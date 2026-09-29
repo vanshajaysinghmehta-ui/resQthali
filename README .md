@@ -557,6 +557,12 @@ The broader goal is to help turn surplus food into a resource rather than simply
 
 ---
 
+## Contributors
+* **Vanshajay Singh Mehta** ([@vanshajaysinghmehta-ui](https://github.com/vanshajaysinghmehta-ui))
+* **Medhansh Sharma** ([@medhanshhh-alt](https://github.com/medhanshhh-alt))
+
+---
+
 # 👥 Project
 
 **resQthali**
